@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-import profilePortrait from "../documents/picture/Personal Profile/首屏头像.png";
+import profilePortrait from "../documents/picture/Personal Profile/首屏头像.jpg";
 import profileIcon1 from "../documents/picture/Personal Profile/Personal Profile_icon_1.png";
 import profileIcon2 from "../documents/picture/Personal Profile/Personal Profile_icon_2.png";
 import profileIcon3 from "../documents/picture/Personal Profile/Personal Profile_icon_3.png";
@@ -38,21 +38,21 @@ import representative7 from "../documents/picture/Representative works/Frame 194
 import representative8 from "../documents/picture/Representative works/Frame 1940698523.png";
 import caseArrow from "../documents/picture/main_work/arrow.png";
 import caseDownIcon from "../documents/picture/main_work/down.png";
-import weekendMainWork from "../documents/picture/main_work/1.png";
-import rdcsMainWork from "../documents/picture/main_work/2.png";
-import integrationMainWork from "../documents/picture/main_work/3.png";
-import buildingMainWork from "../documents/picture/main_work/4.png";
+import weekendMainWork from "../documents/picture/main_work/1.jpg";
+import rdcsMainWork from "../documents/picture/main_work/2.jpg";
+import integrationMainWork from "../documents/picture/main_work/3.jpg";
+import buildingMainWork from "../documents/picture/main_work/4.jpg";
 import buildingVideo from "../documents/picture/main_work/4.2.mov";
-import homeEnergyMainWork from "../documents/picture/main_work/5.png";
-import kunlunSecondWork from "../documents/picture/main_work/6.2.png";
+import homeEnergyMainWork from "../documents/picture/main_work/5.jpg";
+import kunlunSecondWork from "../documents/picture/main_work/6.2.jpg";
 import kunlunThirdVideo from "../documents/picture/main_work/6.3.mov";
 import kunlunFourthVideo from "../documents/picture/main_work/6.4.mov";
-import businessMainWork from "../documents/picture/main_work/7.png";
-import otherWork1 from "../documents/picture/main_work/8.1.png";
-import otherWork2 from "../documents/picture/main_work/8.2.png";
-import otherWork3 from "../documents/picture/main_work/8.3.png";
-import otherWork4 from "../documents/picture/main_work/8.4.png";
-import otherWork5 from "../documents/picture/main_work/8.5.png";
+import businessMainWork from "../documents/picture/main_work/7.jpg";
+import otherWork1 from "../documents/picture/main_work/8.1.jpg";
+import otherWork2 from "../documents/picture/main_work/8.2.jpg";
+import otherWork3 from "../documents/picture/main_work/8.3.jpg";
+import otherWork4 from "../documents/picture/main_work/8.4.jpg";
+import otherWork5 from "../documents/picture/main_work/8.5.jpg";
 import caseUpIcon from "../documents/picture/main_work/up.png";
 import titleArrowBlack from "../documents/picture/main_work/arrow_black.png";
 import titleLeftBracket from "../documents/picture/main_work/left_kuang.png";
@@ -703,7 +703,7 @@ function Experience() {
           <p>Personal Profile</p>
         </div>
         <div className="profileVisualCard">
-          <img src={profilePortrait} alt="Carol 个人形象" />
+          <img src={profilePortrait} alt="Carol 个人形象" loading="lazy" decoding="async" />
         </div>
         <div className="profileInfoCard">
           <p className="profileTitle">Hi, I am Carol</p>
@@ -730,7 +730,7 @@ function Experience() {
         </div>
         <div className="toolGrid" aria-label="设计工具">
           {profileIcons.map((icon, index) => (
-            <img src={icon} alt="" aria-hidden="true" key={index} />
+            <img src={icon} alt="" aria-hidden="true" key={index} loading="lazy" decoding="async" />
           ))}
         </div>
         <div className="careerPath" id="career" aria-label="工作经历">
@@ -757,14 +757,14 @@ function Experience() {
             <div className="workRailRow">
               {[...works.slice(0, 5), ...works.slice(0, 5)].map((image, index) => (
                 <figure className="workRailItem" key={`top-${index}`}>
-                  <img src={image} alt="" aria-hidden="true" />
+                  <img src={image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                 </figure>
               ))}
             </div>
             <div className="workRailRow">
               {[...works.slice(5), ...works.slice(5)].map((image, index) => (
                 <figure className="workRailItem" key={`bottom-${index}`}>
-                  <img src={image} alt="" aria-hidden="true" />
+                  <img src={image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                 </figure>
               ))}
             </div>
@@ -795,7 +795,7 @@ function Projects() {
         <div className="representativeGrid">
           {representativeWorks.map((work, index) => (
             <article className={index === 0 ? "tall" : ""} key={work.image}>
-              <img src={work.image} alt={`代表作品 ${index + 1}`} />
+              <img src={work.image} alt={`代表作品 ${index + 1}`} loading="lazy" decoding="async" />
               {work.titleCn && (
                 <div className="representativeOverlay">
                   <strong>{work.titleCn}</strong>
@@ -891,7 +891,7 @@ function OtherWorksGallery({ items }) {
   return (
     <div className="otherGallery shell">
       <div className="otherGalleryMain">
-        <img src={activeItem.src} alt={activeItem.alt} />
+        <img src={activeItem.src} alt={activeItem.alt} decoding="async" />
       </div>
       <div className="otherThumbViewport" aria-label="其他作品缩略图轮播">
         <div className="otherThumbTrack">
@@ -906,7 +906,7 @@ function OtherWorksGallery({ items }) {
                   onClick={() => setActiveIndex(itemIndex)}
                   aria-label={`查看其他作品 ${itemIndex + 1}`}
                 >
-                  <img src={item.src} alt="" />
+                  <img src={item.src} alt="" loading="lazy" decoding="async" />
                 </button>
               </div>
             );
@@ -965,7 +965,7 @@ function CaseMediaItem({ item }) {
           )}
         </>
       ) : (
-        <img src={item.src} alt={item.alt} />
+        <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
       )}
     </div>
   );
