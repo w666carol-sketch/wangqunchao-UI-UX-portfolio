@@ -173,7 +173,6 @@ const caseDetails = {
       "周末游（Weekend Go）是一款面向年轻人周末轻旅行与露营活动的移动端小程序，帮助用户发现、组织和记录周末出行计划，形成从灵感到决策再到体验沉淀的完整闭环。",
     variant: "light",
     metaTags: ["自然", "活力", "轻松", "安全", "趣味社交"],
-    hideContact: true,
     media: [
       { type: "image", src: weekendMainWork, alt: "周末游小程序项目详情长图" },
     ],
@@ -868,7 +867,9 @@ function WorkDetail({ detail }) {
       ))}
       {!detail.hideContact && (
         <div className="caseContact">
-          <a href="#contact">联系我</a>
+          <a href="#contact" aria-label="联系我">
+            <span className="contactPhoneIcon" aria-hidden="true">☎</span>
+          </a>
         </div>
       )}
     </section>
