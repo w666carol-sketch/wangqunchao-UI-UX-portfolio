@@ -53,6 +53,7 @@ import otherWork2 from "../documents/picture/main_work/8.2.jpg";
 import otherWork3 from "../documents/picture/main_work/8.3.jpg";
 import otherWork4 from "../documents/picture/main_work/8.4.jpg";
 import otherWork5 from "../documents/picture/main_work/8.5.jpg";
+import otherWork6Video from "../documents/picture/main_work/8.6.mov";
 import caseUpIcon from "../documents/picture/main_work/up.png";
 import titleArrowBlack from "../documents/picture/main_work/arrow_black.png";
 import titleLeftBracket from "../documents/picture/main_work/left_kuang.png";
@@ -269,6 +270,7 @@ const caseDetails = {
       { src: otherWork3, alt: "其他作品海报设计" },
       { src: otherWork4, alt: "其他作品宣传册设计" },
       { src: otherWork5, alt: "其他作品旗帜设计" },
+      { type: "video", src: otherWork6Video, alt: "其他作品视频展示" },
     ],
   },
 };
@@ -878,24 +880,46 @@ function WorkDetail({ detail }) {
 
 function OtherWorksGallery({ items }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const activeItem = items[activeIndex];
   const thumbItems = [...items, ...items];
 
   useEffect(() => {
+    if (isModalOpen) {
+      return undefined;
+    }
+
     const timer = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % items.length);
     }, 4200);
 
     return () => window.clearInterval(timer);
-  }, [items.length]);
+  }, [isModalOpen, items.length]);
+
+  useEffect(() => {
+    setIsModalOpen(false);
+  }, [activeIndex]);
+
+  const openVideoModal = () => {
+    if (activeItem.type === "video") {
+      setIsModalOpen(true);
+    }
+  };
 
   return (
     <div className="otherGallery shell">
       <div className="otherGalleryMain">
-        <img src={activeItem.src} alt={activeItem.alt} decoding="async" />
+        {activeItem.type === "video" ? (
+          <button className="otherGalleryVideoPreview" type="button" onClick={openVideoModal} aria-label="播放其他作品视频">
+            <video src={activeItem.src} muted playsInline preload="metadata" aria-label={activeItem.alt} />
+            <span className="otherGalleryPlayIcon" aria-hidden="true">▶</span>
+          </button>
+        ) : (
+          <img src={activeItem.src} alt={activeItem.alt} decoding="async" />
+        )}
       </div>
       <div className="otherThumbViewport" aria-label="其他作品缩略图轮播">
-        <div className="otherThumbTrack">
+        <div className={isModalOpen ? "otherThumbTrack paused" : "otherThumbTrack"}>
           {thumbItems.map((item, index) => {
             const itemIndex = index % items.length;
             return (
@@ -907,13 +931,28 @@ function OtherWorksGallery({ items }) {
                   onClick={() => setActiveIndex(itemIndex)}
                   aria-label={`查看其他作品 ${itemIndex + 1}`}
                 >
-                  <img src={item.src} alt="" loading="lazy" decoding="async" />
+                  {item.type === "video" ? (
+                    <>
+                      <video src={item.src} muted playsInline preload="metadata" aria-label="" />
+                      <span className="otherThumbPlayIcon" aria-hidden="true">▶</span>
+                    </>
+                  ) : (
+                    <img src={item.src} alt="" loading="lazy" decoding="async" />
+                  )}
                 </button>
               </div>
             );
           })}
         </div>
       </div>
+      {isModalOpen && activeItem.type === "video" && (
+        <div className="otherVideoModal" role="dialog" aria-modal="true">
+          <button className="otherVideoClose" type="button" aria-label="关闭视频" onClick={() => setIsModalOpen(false)}>
+            ×
+          </button>
+          <video src={activeItem.src} controls autoPlay loop playsInline />
+        </div>
+      )}
     </div>
   );
 }

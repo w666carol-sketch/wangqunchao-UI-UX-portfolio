@@ -1062,6 +1062,46 @@ img {
   height: auto;
 }
 
+.otherGalleryVideoPreview {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1700 / 956;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: #050505;
+  cursor: pointer;
+}
+
+.otherGalleryVideoPreview video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.otherGalleryPlayIcon,
+.otherThumbPlayIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1;
+}
+
+.otherGalleryPlayIcon {
+  width: clamp(62px, 5vw, 90px);
+  height: clamp(62px, 5vw, 90px);
+  padding-left: 5px;
+  font-size: clamp(36px, 3.2vw, 56px);
+}
+
 .otherThumbViewport {
   width: 100vw;
   margin-left: calc((100vw - min(calc(100vw - 96px), var(--max))) / -2);
@@ -1075,6 +1115,10 @@ img {
   gap: clamp(18px, 1.4vw, 24px);
   animation: otherThumbRail 32s linear infinite;
   will-change: transform;
+}
+
+.otherThumbTrack.paused {
+  animation-play-state: paused;
 }
 
 @keyframes otherThumbRail {
@@ -1096,6 +1140,7 @@ img {
 }
 
 .otherThumb {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -1113,7 +1158,8 @@ img {
   opacity: 1;
 }
 
-.otherThumb img {
+.otherThumb img,
+.otherThumb video {
   display: block;
   width: 100%;
   height: 100%;
@@ -1123,8 +1169,51 @@ img {
 }
 
 .otherThumb:hover img,
-.otherThumb.active img {
+.otherThumb.active img,
+.otherThumb:hover video,
+.otherThumb.active video {
   transform: scale(1.08);
+}
+
+.otherThumbPlayIcon {
+  width: 44px;
+  height: 44px;
+  padding-left: 3px;
+  font-size: 26px;
+}
+
+.otherVideoModal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 5vw, 86px);
+  background: rgba(0, 0, 0, 0.84);
+}
+
+.otherVideoModal video {
+  width: min(92vw, 1500px);
+  max-height: 82vh;
+  border-radius: 12px;
+  background: #000;
+}
+
+.otherVideoClose {
+  position: absolute;
+  top: clamp(20px, 3vw, 52px);
+  right: clamp(20px, 3vw, 52px);
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
 }
 
 .casePlayButton {
